@@ -24,7 +24,7 @@ import (
 
 type signatureInfo struct {
 	seed      string
-	signature string 
+	signature string
 	keyid     string
 	algorithm string
 }
@@ -133,10 +133,10 @@ func requestParser(r *http.Request) signatureInfo {
 	signatureInput = signatureInput[index+1:]
 	index = strings.Index(signature, ":")
 	signature = signature[index+1:]
-	signature = signature[:len(signature) - 1]
+	signature = signature[:len(signature)-1]
 
 	// check if the new line needs to be removed from the end
 	parsedSignatureInput += ("\"@signature-params\": " + signatureInput + "\n")
-	s := signatureInfo {seed: parsedSignatureInput, signature: signature, keyid: keyid, algorithm: algorithm}
+	s := signatureInfo{seed: parsedSignatureInput, signature: signature, keyid: keyid, algorithm: algorithm}
 	return s
 }

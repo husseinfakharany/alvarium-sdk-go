@@ -16,6 +16,7 @@ package annotators
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
@@ -83,9 +84,10 @@ func TestPkiAnnotator_Do(t *testing.T) {
 			tpm := NewPkiAnnotator(tt.cfg)
 			b, _ := json.Marshal(tt.data)
 			anno, err := tpm.Do(context.Background(), b)
+			fmt.Printf("err: %v\n", err)
 			test.CheckError(err, tt.expectError, tt.name, t)
 			if err == nil {
-				result, err := verifySignature(tt.cfg.Signature.PublicKey, anno)
+				result, err := VerifySignature(tt.cfg.Signature.PublicKey, anno)
 				if err != nil {
 					t.Error(err.Error())
 				} else if !result {

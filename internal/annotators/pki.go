@@ -53,6 +53,7 @@ func (a *PkiAnnotator) Do(ctx context.Context, data []byte) (contracts.Annotatio
 	}
 
 	ok, err := sig.verifySignature(a.sign.PublicKey)
+	fmt.Printf("ok: %v\n", ok)
 	if err != nil {
 		return contracts.Annotation{}, err
 	}
@@ -100,6 +101,7 @@ func (s *signable) verifySignature(key config.KeyInfo) (bool, error) {
 	}
 
 	pub, err := ioutil.ReadFile(key.Path)
+	fmt.Printf("pub: %v\n", string(pub))
 	if err != nil {
 		return false, err
 	}
