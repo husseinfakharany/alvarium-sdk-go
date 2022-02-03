@@ -100,7 +100,7 @@ func (s *signable) verifySignature(key config.KeyInfo) (bool, error) {
 	case contracts.KeyECDsaP256:
 		p = ed25519.New()
 	default:
-		return false, fmt.Errorf("unrecognized key type %s", key.Type)
+		return false, fmt.Errorf("unreczed key type %s", key.Type)
 	}
 	// Path can change from one enviroment to another
 	// When using Kubernetes, we can search for the keyid directly in the secrets folder, as all keys can be stored there
